@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "swiffy-slider/css";
 import { useProduct } from "../../hooks/useProducts";
 export default function ProductSlider() {
   const { cards } = useProduct();

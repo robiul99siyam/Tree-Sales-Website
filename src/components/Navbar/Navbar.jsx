@@ -43,7 +43,7 @@ export default function Navbar() {
                 className="hvr-underline-from-center px-3 py-2"
                 to="/login"
               >
-                Logout
+                LOGOUT
               </Link>
             ) : (
               <>

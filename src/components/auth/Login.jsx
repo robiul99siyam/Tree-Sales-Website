@@ -1,33 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../api";
+import Field from "./Field";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const LoadLogin = async (e) => {
-    e.preventDefault();
 
-    const loginData = {
-      username: username,
-      password: password,
-    };
-
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const LoadLogin = async (data) => {
     try {
       const response = await api.post(
         `${import.meta.env.VITE_SERVER_BASE_URL}/user/Login/`,
-        loginData
+        data
       );
 
       if (response.status === 200) {
         const { user_id, token } = response.data;
-        // localStorage.setItem("user_id", user_id);
-        // localStorage.setItem("token", token);
+
         sessionStorage.setItem("user_id", user_id);
         sessionStorage.setItem("token", token);
         navigate("/");
-        // console.log();
+        reset();
       }
     } catch (err) {
       console.log(err);
@@ -50,38 +49,33 @@ export default function Login() {
 
           {/* Form Section */}
           <div className="w-full md:w-1/2 lg:w-2/5">
-            <form onSubmit={LoadLogin} className="p-8 shadow-lg rounded-lg">
-              {/* Username */}
-              <label
-                htmlFor="username"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Username
-              </label>
-              <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full border text-black border-gray-300 p-3 rounded-lg focus:ring-2 focus:outline-none"
-                required
-              />
+            <form
+              onSubmit={handleSubmit(LoadLogin)}
+              className="p-8 shadow-lg rounded-lg"
+            >
+              <Field label="Username" error={errors.username}>
+                <input
+                  {...register("username", {
+                    required: "Username is Required",
+                  })}
+                  id="username"
+                  type="text"
+                  className="w-full border text-black border-gray-300 p-3 rounded-lg focus:ring-2 focus:outline-none"
+                />
+              </Field>
 
               {/* Password */}
-              <label
-                htmlFor="password"
-                className="block text-gray-700 font-medium mt-4 mb-2"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full text-black border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-pink-[#81AC42] focus:outline-none"
-                required
-              />
+
+              <Field label="Password" error={errors.password}>
+                <input
+                  {...register("password", {
+                    required: "Password is Required",
+                  })}
+                  id="password"
+                  type="password"
+                  className="w-full border text-black border-gray-300 p-3 rounded-lg focus:ring-2 focus:outline-none"
+                />
+              </Field>
 
               {/* Submit Button */}
               <button

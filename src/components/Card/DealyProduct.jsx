@@ -6,9 +6,14 @@ export default function DealyProduct() {
   const { cards } = useProduct();
   const navigate = useNavigate();
 
+  const user = sessionStorage.getItem("user_id");
   const handleDetails = (card) => {
     if (!card) return;
-    navigate("/details", { state: { card } });
+    if (user) {
+      navigate("/details", { state: { card } });
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <section className="p-10">

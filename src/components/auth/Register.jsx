@@ -1,11 +1,38 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { api } from "../../api";
 import registerImage from "../../assests/undraw_apps_i78y.svg";
+import Field from "./Field";
 export default function SignUp() {
-  const handleRegister = (event) => {
-    event.preventDefault();
-    // Add your form submission logic here
-  };
+  const navigate = useNavigate();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
+  const SubmitForm = async (data) => {
+    try {
+      const response = await api.post(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/user/Register/`,
+        data
+      );
+
+      if (response.status === 200) {
+        toast.success(response.data);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.message);
+    }
+
+    reset();
+  };
   return (
     <section className="min-h-screen p-8">
       <div className="container mx-auto h-full">
@@ -23,99 +50,96 @@ export default function SignUp() {
                     className="text-center text-red-500 font-semibold"
                   ></p>
 
-                  <form onSubmit={handleRegister} className="space-y-4">
+                  <form
+                    onSubmit={handleSubmit(SubmitForm)}
+                    className="space-y-4"
+                  >
                     {/* Username */}
-                    <div className="flex items-center space-x-3">
-                      <i className="fas fa-user text-gray-400"></i>
+                    <div className="flex items-center  space-x-3">
                       <div className="w-full">
-                        <label className="block text-sm font-medium text-gray-700">
-                          Username
-                        </label>
-                        <input
-                          type="text"
-                          id="username"
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                          required
-                        />
+                        <Field label="Username" error={errors.username}>
+                          <input
+                            {...register("username", {
+                              required: "Username is Required",
+                            })}
+                            type="text"
+                            id="username"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          />
+                        </Field>
                       </div>
                     </div>
-
-                    {/* First Name */}
-                    <div className="flex items-center space-x-3">
-                      <i className="fas fa-user text-gray-400"></i>
+                    <div className="flex items-center  space-x-3">
                       <div className="w-full">
-                        <label className="block text-sm font-medium text-gray-700">
-                          First Name
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                          required
-                        />
+                        <Field label="First name" error={errors.first_name}>
+                          <input
+                            {...register("first_name", {
+                              required: "First Name is Required",
+                            })}
+                            type="text"
+                            id="first_name"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          />
+                        </Field>
                       </div>
                     </div>
-
-                    {/* Last Name */}
-                    <div className="flex items-center space-x-3">
-                      <i className="fas fa-user text-gray-400"></i>
+                    <div className="flex items-center  space-x-3">
                       <div className="w-full">
-                        <label className="block text-sm font-medium text-gray-700">
-                          Last Name
-                        </label>
-                        <input
-                          type="text"
-                          id="last_name"
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                          required
-                        />
+                        <Field label="Last name" error={errors.last_name}>
+                          <input
+                            {...register("last_name", {
+                              required: "First Name is Required",
+                            })}
+                            type="text"
+                            id="last_name"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          />
+                        </Field>
                       </div>
                     </div>
-
-                    {/* Email */}
-                    <div className="flex items-center space-x-3">
-                      <i className="fas fa-envelope text-gray-400"></i>
+                    <div className="flex items-center  space-x-3">
                       <div className="w-full">
-                        <label className="block text-sm font-medium text-gray-700">
-                          Your Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                          required
-                        />
+                        <Field label="Password" error={errors.password}>
+                          <input
+                            {...register("password", {
+                              required: "Password Name is Required",
+                            })}
+                            type="password"
+                            id="password"
+                            className="w-full p-2 text-gray-950 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          />
+                        </Field>
                       </div>
                     </div>
-
-                    {/* Password */}
-                    <div className="flex items-center space-x-3">
-                      <i className="fas fa-lock text-gray-400"></i>
+                    <div className="flex items-center  space-x-3">
                       <div className="w-full">
-                        <label className="block text-sm font-medium text-gray-700">
-                          Password
-                        </label>
-                        <input
-                          type="password"
-                          id="password1"
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                          required
-                        />
+                        <Field
+                          label="Confrim password"
+                          error={errors.confrim_password}
+                        >
+                          <input
+                            {...register("confrim_password", {
+                              required: "confrim password is Required",
+                            })}
+                            type="password"
+                            id="confrim_password"
+                            className="w-full p-2 border text-gray-950 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          />
+                        </Field>
                       </div>
                     </div>
-
-                    {/* Confirm Password */}
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center  space-x-3">
                       <div className="w-full">
-                        <label className="block text-sm font-medium text-gray-700">
-                          Confirm Password
-                        </label>
-                        <input
-                          type="password"
-                          id="password2"
-                          className="w-full p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                          required
-                        />
+                        <Field label="Email address" error={errors.email}>
+                          <input
+                            {...register("email", {
+                              required: "email address is Required",
+                            })}
+                            type="email"
+                            id="email"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          />
+                        </Field>
                       </div>
                     </div>
 
@@ -123,7 +147,7 @@ export default function SignUp() {
                     <div className="flex justify-center mt-4">
                       <button
                         type="submit"
-                        className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition-all"
+                        className="bg-[#81AC42]  w-full text-white font-bold px-6 py-3 rounded-lg shadow-lg transition-all"
                       >
                         Register
                       </button>
@@ -139,11 +163,24 @@ export default function SignUp() {
                     className="w-full h-auto max-w-sm"
                   />
                 </div>
+                <div className="py-4 lg:py-6">
+                  <p className="text-center text-xs text-gray-600/95 lg:text-sm">
+                    Don’t have account?
+                    <Link
+                      className="text-white transition-all hover:text-lwsGreen hover:underline"
+                      to="/login"
+                    >
+                      login here
+                    </Link>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </section>
   );
 }
