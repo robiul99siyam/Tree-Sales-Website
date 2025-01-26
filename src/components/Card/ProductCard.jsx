@@ -1,14 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../hooks/useProducts";
+import Loading from "../loadding/Loading";
 
 export default function ProductCard({ id }) {
   const navigate = useNavigate();
   const { cards, loading } = useProduct();
-
+  const user_id = sessionStorage.getItem("user_id");
   const handleDetails = (card) => {
     if (!card) return;
-    navigate("/details", { state: { card } });
+    if (user_id) {
+      navigate("/details", { state: { card } });
+    } else {
+      navigate("/login");
+    }
   };
   const productValue = cards.results || [];
   const filterProductValue = id
@@ -45,9 +50,9 @@ export default function ProductCard({ id }) {
               </div>
             ))
           ) : (
-            <h1 className="text-center items-center w-96 my-auto text-gray-400 font-bold  text-4xl">
-              Not found Product
-            </h1>
+            <div className="flex justify-center items-center gap-5 flex-wrap">
+              <Loading />
+            </div>
           )}
         </>
       )}
