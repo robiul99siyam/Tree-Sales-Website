@@ -24,7 +24,6 @@ export default function SignUp() {
 
       if (response.status === 200) {
         toast.success(response.data);
-        navigate("/login");
       }
     } catch (error) {
       console.log(error);
