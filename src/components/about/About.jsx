@@ -8,7 +8,7 @@ import { AboutData } from "../../utils/data";
 import ProductDescription from "../details/ProductDescription";
 
 export default function About() {
-  const [activeId, setActiveId] = useState(null);
+  const [activeId, setActiveId] = useState(false);
   const handleToggle = (id) => {
     setActiveId(id);
   };
@@ -49,11 +49,11 @@ export default function About() {
               {AboutData.map((about) => (
                 <div
                   key={about.id}
-                  className="bg-white border shadow-lg rounded-md p-4 hover:shadow-xl transition-shadow duration-300 my-2"
+                  className=" border shadow-lg rounded-md p-4 hover:shadow-xl transition-shadow duration-300 my-2"
                 >
                   <h3
                     onClick={() => handleToggle(about.id)}
-                    className="text-xl font-serif font-bold text-gray-800 mb-2 cursor-pointer"
+                    className="text-xl font-serif font-bold text-gray-600 mb-2 cursor-pointer"
                   >
                     {about.title}
                   </h3>

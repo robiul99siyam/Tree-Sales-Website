@@ -26,7 +26,7 @@ export default function ProductTag({ handleFilter }) {
         {productTag.map((tag) => (
           <button
             key={tag.id}
-            onClick={() => handleFilter(tag.id)}
+            onClick={() => handleFilter(tag)}
             className="px-5 py-2 rounded-full  border"
           >
             {tag.name}

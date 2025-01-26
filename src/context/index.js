@@ -1,4 +1,5 @@
 import { createContext } from "react";
 
 const CardContext = createContext();
-export { CardContext };
+const ThemeContext = createContext();
+export { CardContext, ThemeContext };

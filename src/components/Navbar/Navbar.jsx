@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { FaRegMoon } from "react-icons/fa6";
+import { IoSunnyOutline } from "react-icons/io5";
 import logoImage from "../../assests/logo/logo.png";
-import DrapDown from "./DrapDown";
+import { ThemeContext } from "../../context";
 export default function Navbar() {
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
+
   return (
-    <nav className="py-5">
+    <nav className="py-5 mx-auto">
       <div className="flex items-center justify-start gap-5">
-        <DrapDown />
         {/* Navbar Links */}
         <div className="hidden lg:flex items-center space-x-8">
           <ul className="flex items-center space-x-6 text-sm gap-5">
@@ -34,11 +38,14 @@ export default function Navbar() {
           <img className="px-4 mb-10" src={logoImage} alt="Logo" />
 
           <ul className="flex items-center space-x-6 gap-5">
+            <Link
+              to="/login"
+              className="text-sm  hvr-underline-from-center px-3 py-2"
+            >
+              LOGIN
+            </Link>
             <li className="text-sm  hvr-underline-from-center px-3 py-2">
-              BLOG
-            </li>
-            <li className="text-sm  hvr-underline-from-center px-3 py-2">
-              CONTACT
+              REGISTER
             </li>
             <li>
               <a
@@ -47,6 +54,12 @@ export default function Navbar() {
               >
                 <i className="bi bi-cart4 text-xl"></i>
               </a>
+            </li>
+            <li
+              onClick={() => setDarkMode(!darkMode)}
+              className="text-sm px-3 py-2"
+            >
+              {darkMode ? <IoSunnyOutline /> : <FaRegMoon />}
             </li>
           </ul>
         </div>

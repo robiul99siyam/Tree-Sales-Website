@@ -4,11 +4,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import CardProvider from "./provider/CardProvider.jsx";
+import ThemeProvider from "./provider/ThemeProvider.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
       <CardProvider>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </CardProvider>
     </Router>
   </StrictMode>

@@ -4,9 +4,10 @@ import ProductDescription from "../details/ProductDescription";
 import ProductStore from "./ProductStore";
 import ProductTag from "./ProductTag";
 export default function Store() {
-  const [id, setId] = useState(null);
-  const handleFilter = (id) => {
-    setId(id);
+  const [name, setName] = useState(null);
+  const handleFilter = (tag) => {
+    console.log(tag);
+    setName(tag.name);
   };
   return (
     <>
@@ -17,7 +18,7 @@ export default function Store() {
             <ProductTag handleFilter={handleFilter} />
           </div>
           <div className="col-span-9">
-            <ProductStore id={id} />
+            <ProductStore id={name} />
           </div>
         </section>
         <ProductDescription />

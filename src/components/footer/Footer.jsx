@@ -6,7 +6,7 @@ export default function Footer() {
       {/* Section: Social media */}
       <section className="flex justify-center lg:justify-between p-4 border-b border-gray-300">
         {/* Left */}
-        <div className="hidden lg:block mr-5">
+        <div className="hidden lg:block mr-5 text-gray-600">
           <span>Get connected with us on social networks:</span>
         </div>
         {/* Right */}
@@ -23,7 +23,7 @@ export default function Footer() {
               <h6 className="text-lg font-bold mb-4">
                 <img src={LogoImage} alt="Logo" className="inline-block" />
               </h6>
-              <p>
+              <p className="text-gray-600">
                 Heaven fruitful doesn't cover lesser days appear creeping
                 seasons so behold.
               </p>
@@ -34,7 +34,7 @@ export default function Footer() {
               <h5 className="text-[#223a66] text-lg font-bold mb-4">
                 Popular Tags
               </h5>
-              <ul>
+              <ul className="text-gray-600">
                 <li>Plant</li>
                 <li>Floor</li>
                 <li>Radiology</li>
@@ -46,7 +46,7 @@ export default function Footer() {
             {/* Support */}
             <div>
               <h5 className="text-[#223a66] text-lg font-bold mb-4">Support</h5>
-              <ul>
+              <ul className="text-gray-600">
                 <li>Terms & Conditions</li>
                 <li>Privacy Policy</li>
                 <li>Company Support</li>
@@ -57,10 +57,10 @@ export default function Footer() {
 
             {/* Get In Touch */}
             <div>
-              <h5 className="text-[#223a66] text-lg font-bold mb-4">
+              <h5 className="dark:text-[#223a66] text-[#223a66] text-lg font-bold mb-4">
                 Get In Touch
               </h5>
-              <ul>
+              <ul className="text-gray-600">
                 <li className="flex items-center">
                   <i className="bi bi-envelope mr-3"></i>
                   siyamrobiul@gmail.com
@@ -77,9 +77,9 @@ export default function Footer() {
       {/* Section: Links */}
 
       {/* Copyright */}
-      <div className="text-center p-4">
+      <div className="text-center p-4 text-gray-800">
         © 2025 Copyright:
-        <a href="#" className="text-gray-800 font-bold ml-1">
+        <a href="#" className=" font-bold ml-1">
           Tree Shop Mart
         </a>
       </div>

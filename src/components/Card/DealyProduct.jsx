@@ -19,12 +19,12 @@ export default function DealyProduct() {
         <br /> your living spaces and contribute to a greener environment.
       </p>
 
-      <div className="swiffy-slider slider-item-show3 slider-item-reveal slider-nav-dark slider-nav-outside-expand">
+      <div className="swiffy-slider  slider-item-show3 slider-item-reveal slider-nav-dark slider-nav-outside-expand">
         <ul className="slider-container py-4" id="slider2">
           {cards?.results?.map((card) => (
             <div key={card.id}>
               <li onClick={() => handleDetails(card)}>
-                <div className="card shadow h-100">
+                <div className="card shadow h-100 border border-[#b8b0b0]  rounded-md">
                   <div className="ratio ratio-1x1">
                     <img
                       src={card.image}
@@ -33,7 +33,7 @@ export default function DealyProduct() {
                       alt="..."
                     />
                   </div>
-                  <div className="card-body d-flex flex-column flex-md-row">
+                  <div className="card-body p-2 d-flex flex-column flex-md-row">
                     <div className="flex-grow-1">
                       <strong>{card.name}</strong>
                       <p className="card-text">price : {card.price} ৳</p>
